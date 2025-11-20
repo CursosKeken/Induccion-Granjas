@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ingreso al Curso</title>
+  <style>
+    body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background: #f1f1f1; }
+    form { background: white; padding: 2em; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
+    input, button { display: block; margin: 1em 0; padding: 0.5em; width: 100%; }
+    .error { color: red; }
+  </style>
+</head>
+<body>
+  <form id="loginForm">
+    <h2>Ingreso al Curso de Inducción</h2>
+    <input type="text" id="curp" placeholder="CURP" required pattern="^[A-Z]{4}[0-9]{6}[HM][A-Z]{5}[0-9A-Z]{2}$" />
+    <input type="password" id="password" placeholder="Contraseña" required />
+    <button type="submit">Ingresar</button>
+    <p id="error" class="error"></p>
+  </form>
+
+  <script>
+    const usuariosAutorizados = [
+
+"CAVC810610HYNHRS08",
+"DIMM870326HYNZTN00",
+"BACJ800401HYNSMM02",
+"BATM070103HYNLZSA8",
+"BODR040802MYNRZQA7",
+"CACL710210HYNBBV00",
+"CAPE900713HYNBCN07",
+"CARM830707HYNLDG01",
+"CAFM950430HYNNRN04",
+"CACJ690601HYNSCC03",
+"CAME920519HYNSKL07",
+"CABI940505MYNHSR06",
+"CACG980319HYNHNS05",
+"CICH940305HYNHNM03",
+"CIPR700726HYNHCB08",
+"CIPF881217MYNHTR06",
+"CUHG740826HYNMCL03",
+"FAAR620527HDFRRB00",
+"GATA021216HYNRHNA2",
+"GUGS760126HVZZRN06",
+"HECE940523HYNRSD00",
+"MATA930508HYNRNR07",
+"MINR940429HYNSRG03",
+"MOPL951027HYNNRS09",
+"SOCC951230HYNBTR08",
+"UIPR930212HYNCCM02",
+"UINW720111HYNCGL03",
+"UICJ070309HYNCHSA0",
+"ZACA940317MYNPTD08",
+"UXTA710615HYNCTG05",
+"CEBM951126HYNTJR03",
+"CADF040929HYNBZRA7",
+"CAMM900805HYNHYS02",
+"KUEL990312HYNXSS08",
+"VECV990903HYNLCC07",
+"FAGF880527HYNRLL09",
+"SOPL860219HYNLCS00",
+"CACJ800527HYNHHR01",
+"FAAJ051227HYNRRRA8",
+"AABA000521HYNZLLA4",
+"COHC880821HYNHCL09",
+"CAEJ030811HYNBKBA2",
+"COMM000218HYNBYRAS",
+"MADF690120HYNRRR12",
+"CANJ940214HYNNVQ02"
+
+    ];
+
+    const PASSWORD_CORRECTA = "KEKEN2025";
+
+    document.getElementById("loginForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const curp = document.getElementById("curp").value.trim().toUpperCase();
+      const password = document.getElementById("password").value.trim();
+      const errorBox = document.getElementById("error");
+
+      if (!usuariosAutorizados.includes(curp)) {
+        errorBox.textContent = "CURP no autorizado.";
+        return;
+      }
+
+      if (password !== PASSWORD_CORRECTA) {
+        errorBox.textContent = "Contraseña incorrecta.";
+        return;
+      }
+
+      localStorage.setItem("curp", curp);
+      window.location.href = "menu.html";
+    });
+  </script>
+</body>
+</html>
